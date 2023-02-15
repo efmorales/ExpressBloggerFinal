@@ -6,6 +6,7 @@ var logger = require('morgan');
 //load environment variables from .env (.env is the default file)
 require("dotenv").config();
 
+
 //register routes.
 //NOTE: notice how there is .js after index, this is because
 // we exported the module as index. 
@@ -14,8 +15,11 @@ var usersRouter = require('./routes/users');
 var blogsRouter = require('./routes/blogs');
 
 //connecting to mongo db 
-var { mongoConnect } = require('./mongo.js');
-mongoConnect();
+// var { mongoConnect } = require('./mongo.js');
+// mongoConnect();
+
+var { mongooseConnect } = require('./mongoose.js');
+mongooseConnect();
 
 var app = express();
 
