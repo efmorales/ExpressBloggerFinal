@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 //load environment variables from .env (.env is the default file)
 require("dotenv").config();
 
@@ -22,6 +23,10 @@ var { mongooseConnect } = require('./mongoose.js');
 mongooseConnect();
 
 var app = express();
+
+//add CORS middleware 
+app.use(cors());
+app.options("*", cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
