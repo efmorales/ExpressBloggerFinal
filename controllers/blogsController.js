@@ -95,20 +95,20 @@ async function getOneBlogById(req, res) {
     }
 }
 
-// update one blog by title
+// update one blog by id
 async function updateOneBlog(req, res) {
-    //checking if the parameter title was passed in
-    if (!req.params.title) {
+    //checking if the parameter id was passed in
+    if (!req.params.id) {
         res.json({
             success: false,
-            message: "The blog title must be provided in the url parameters",
+            message: "The blog id must be provided in the url parameters",
         });
         return;
     }
 
     try {
         const blogPosts = await Blog.findOneAndUpdate(
-            { title: req.params.title },
+            { id: req.params.id },
             {
                 $set: {
                     title: req.body.title,
@@ -129,20 +129,20 @@ async function updateOneBlog(req, res) {
     }
 }
 
-// delete one blog by title
+// delete one blog by id
 async function deleteOneBlog(req, res) {
-    //checking if the parameter title was passed in
-    if (!req.params.title) {
+    //checking if the parameter id was passed in
+    if (!req.params.id) {
         res.json({
             success: false,
-            message: "The blog title must be provided in the url parameters",
+            message: "The blog id must be provided in the url parameters",
         });
         return;
     }
 
     try {
         const blogPosts = await Blog.findOneAndDelete({
-            title: req.params.title,
+            id: req.params.id,
         });
         res.json({
             success: true,

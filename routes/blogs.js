@@ -18,11 +18,12 @@ router.get('/get-one/:id',blogsController.getOneBlogById);
 // POST Create One Blog Post
 router.post("/create-one", blogsController.createOneBlog);
 
-// PUT Update One Blog Post by title
-router.put("/update-one/:title", blogsController.updateOneBlog);
+// PUT Update One Blog Post by id
 
-// DELETE Delete One Blog Post by title
-router.delete("/delete-one/:title", blogsController.deleteOneBlog);
+router.put("/update-one/:id", blogsController.updateOneBlog);
+
+// DELETE Delete One Blog Post by id
+router.delete("/delete-one/:id", blogsController.deleteOneBlog);
 
 /* GET home page. */
 
