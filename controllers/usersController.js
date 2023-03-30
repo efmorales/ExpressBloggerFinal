@@ -82,7 +82,8 @@ async function loginUser(req, res) {
             message: "User logged in successfully",
             token,
             userType,
-            email: user.email
+            email: user.email,
+            userID: user.id,
         }).status(200);
 
         return;
@@ -115,14 +116,16 @@ async function getMessage(req, res) {
         if (userData && userData.scope === "user") {
             return res.json({
                 success: true,
-                message: `I'm a normal user with the email ${userData.email}`
+                message: `I'm a normal user with the email ${userData.email}`,
+                
             }).status(200);
         }
 
         if (userData && userData.scope === "admin") {
             return res.json({
                 success: true,
-                message: `I'm an admin user with the email ${userData.email}`
+                message: `I'm an admin user with the email ${userData.email}`,
+                
             }).status(200);
         }
 
