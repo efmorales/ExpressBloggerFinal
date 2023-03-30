@@ -4,6 +4,7 @@ const {
   registerUser,
   loginUser,
   getMessage,
+  logOutUser,
 } = require('../controllers/usersController');
 
 /* GET users listing. */
@@ -14,5 +15,6 @@ router.get('/', function (req, res, next) {
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/message', getMessage);
+router.post('/logout', logOutUser);
 
 module.exports = router;

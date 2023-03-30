@@ -137,8 +137,59 @@ async function getMessage(req, res) {
     }
 }
 
+async function logOutUser(req, res) {
+    try {
+      const tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
+      const token = req.headers[tokenHeaderKey];
+      const decoded = verifyToken(token);
+  
+      if (!decoded) {
+        return res.status(401).json({
+          success: false,
+          message: "Invalid token"
+        });
+      }
+  
+      const userData = decoded.userData;
+  
+      if (userData && userData.scope === "user") {
+        // Remove user's token from database
+        await User.updateOne({ _id: userData._id }, { $unset: { authToken: 1 } });
+        return res.status(200).json({
+          success: true,
+          message: "Logged out successfully"
+        });
+      }
+  
+      if (userData && userData.scope === "admin") {
+        // Remove user's token from database
+
+        await User.updateOne({
+            _id: userData._id
+            }, {
+            $unset: {
+                authToken: 1
+            }
+        })
+        return res.status(200).json({
+            success: true,
+            message: "Logged out successfully"
+        });
+        }
+  
+      throw Error("Access denied");
+  
+    } catch (error) {
+      return res.status(401).json({
+        success: false,
+        message: error.message
+      });
+    }
+  }
+
 module.exports = {
     registerUser,
     loginUser,
     getMessage,
+    logOutUser,
 }
